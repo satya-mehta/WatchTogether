@@ -9,7 +9,24 @@
 </head>
 <body>
     <h1>What will you watch today ?</h1>
+    <div id="player"></div>
+    <button onclick="playVideo()">Play</button>
+    <button onclick="pauseVideo()">Pause</button>
+    <button onclick="nextVideo()">Next</button>
+    <button onclick="previousVideo()">Previous</button>
+
+    <!-- <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/videoseries?list=PL5o3IhqKHiwgeKLs4isiqon45TiEi27rb" 
+    frameborder="0" 
+    allow="autoplay; encrypted-media" 
+    allowfullscreen>
+</iframe> -->
+
     <script src="/socket.io/socket.io.js" ></script>
     <script src="app.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
 </body>
 </html>
