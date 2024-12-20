@@ -1,56 +1,34 @@
-// Establish a WebSocket connection to the server
-const socket = new WebSocket('ws://localhost:8080'); // Change to your server's URL
+// content.js
+let socket = new WebSocket('ws://localhost:8080'); // WebSocket server connection
 
-// On WebSocket open
-socket.addEventListener('open', function (event) {
-    console.log("Connected to WebSocket server");
-});
-
-// Listen for incoming messages from the WebSocket server
-socket.onmessage = (event) => {
-    const data = JSON.parse(event.data); // Parse the incoming JSON message
-    
-    // Get the YouTube video player
-    const player = document.querySelector('video');
-    
-    // Synchronize actions based on received data
-    if (data.action === 'play') {
-        player.play(); // Play the video
-    }
-    if (data.action === 'pause') {
-        player.pause(); // Pause the video
-    }
-    if (data.action === 'seek') {
-        player.currentTime = data.timestamp; // Seek to the specified time
-    }
+socket.onopen = function () {
+  console.log('Connected to WebSocket server');
 };
 
-// Example of sending play/pause/seek events to the server
-const player = document.querySelector('video');
+socket.onmessage = function (event) {
+  const message = JSON.parse(event.data);
+  const video = document.querySelector('video');
 
-// When play button is pressed
-player.addEventListener('play', () => {
-    const message = {
-        action: 'play', // Action type
-        timestamp: player.currentTime // Send the current time
-    };
-    socket.send(JSON.stringify(message)); // Send the message to the WebSocket server
+  if (message.action === 'play') {
+    video.play();
+  } else if (message.action === 'pause') {
+    video.pause();
+  } else if (message.action === 'seek') {
+    video.currentTime = message.time;
+  }
+};
+
+// Detect video actions (play, pause, seek)
+const video = document.querySelector('video');
+
+video.addEventListener('play', () => {
+  socket.send(JSON.stringify({ action: 'play' }));
 });
 
-// When pause button is pressed
-player.addEventListener('pause', () => {
-    const message = {
-        action: 'pause',
-        timestamp: player.currentTime
-    };
-    socket.send(JSON.stringify(message));
+video.addEventListener('pause', () => {
+  socket.send(JSON.stringify({ action: 'pause' }));
 });
 
-// When the video is seeked
-player.addEventListener('seeked', () => {
-    const message = {
-        action: 'seek',
-        timestamp: player.currentTime
-    };
-    socket.send(JSON.stringify(message)); // Send new timestamp
+video.addEventListener('seeked', () => {
+  socket.send(JSON.stringify({ action: 'seek', time: video.currentTime }));
 });
