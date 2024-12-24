@@ -18,4 +18,41 @@
   #watch-together-chatbox button {
     width: 15%;
   }
-  
+
+  #chat-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-box {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+#chat-input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#send-message, #mic-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#mic-button {
+    background-color: #f44336;
+}

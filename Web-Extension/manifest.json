@@ -4,32 +4,30 @@
     "version": "1.0",
     "description": "Watch YouTube videos together with your friends in real-time.",
     "permissions": [
-      "tabs",
-      "storage",
-      "activeTab",
-      "webNavigation"
+        "tabs",
+        "storage",
+        "activeTab",
+        "webNavigation"
     ],
     "host_permissions": [
-      "http://www.youtube.com/*",
-      "https://www.youtube.com/*"
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*"
     ],
     "background": {
-      "service_worker": "background.js"
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
     },
     "content_scripts": [
-      {
-        "matches": [
-          "https://www.youtube.com/*",
-          "http://www.youtube.com/*"
-        ],
-        "js": ["content.js"],
-        "css": ["styles.css"]
-      }
+        {
+            "matches": ["https://www.youtube.com/*"],
+            "js": ["content.js"]
+        }
     ],
     "icons": {
-      "16": "assets/icon.png",
-      "48": "assets/icon.png",
-      "128": "assets/icon.png"
+        "16": "assets/icon.png",
+        "48": "assets/icon.png",
+        "128": "assets/icon.png"
     }
-  }
-  
+}
